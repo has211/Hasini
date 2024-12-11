@@ -1,0 +1,6 @@
+LDA 8000      ; Load the number from memory location 8000H into the accumulator
+CMA            ; Complement the accumulator (one's complement)
+ADI 01H        ; Add 1 to the accumulator (to get two's complement)
+STA 8001      ; Store the result (two's complement) in memory location 8001H
+
+HLT            ; Halt the program
