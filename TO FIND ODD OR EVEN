@@ -1,0 +1,8 @@
+LDA 8050 	;Load the accumulator with the content of memory location 8050
+ANI 01 		;Logical AND operation with accumulator and immediate value 01
+JZ LOOP1 	;Jump to LOOP1 if the result of the AND operation is zero
+MVI A,11 	;Move immediate value 11 into the accumulator [Odd number]
+JMP LOOP2 	;Jump to LOOP2
+LOOP1: MVI A,22 ;Move immediate value 22 into the accumulator [Even number]
+LOOP2: STA 8051 ;Store the accumulator content at memory location 8051H
+HLT 		;Halt the processor
