@@ -1,0 +1,15 @@
+LXI H,8050 	;Load H and L registers with address 8000
+MOV C, M 	;Move the content of memory at HL to register C
+INX H 		;Increment HL
+MOV B, M 	;Move the content of memory at HL to register B
+DCR C 		;Decrement the value in register C
+LOOP: INX H 	;Increment HL
+MOV A, M 	;Move the content of memory at HL to register A
+CMP B 		;Compare A and B
+JNC SKIP 	;Jump to SKIP if the carry flag is set (A < B)
+MOV B, A 	;Move the content of register A to register B
+SKIP: DCR C 	;Decrement the value in register C
+JNZ LOOP 	;Jump to LOOP if the zero flag is not set (C != 0)
+LXI H,8058 	;Load H and L registers with address 8500
+MOV M, B 	;Move the content of register B to the memory at HL 
+HLT 		;Halt the microprocessor
