@@ -1,0 +1,24 @@
+LXI H, 8050H       ; HL points to the starting address to store result
+MVI B, 16          ; Divisor = 16
+MOV D, C           ; Copy input decimal number to D
+CONVERT: MVI E, 0  ; Clear the quotient accumulator
+MOV A, D           ; Load the current number into A
+DIV_LOOP: CMP B      ; Compare A with 16
+JC STORE_REMAINDER   ; If A < 16, remainder is ready
+SUB B               ; Subtract 16 from A
+INR E               ; Increment E (quotient counter)
+JMP DIV_LOOP        ; Repeat division loop
+STORE_REMAINDER: MOV D, A ; Save the remainder
+MOV A, D           ; Load the remainder into A
+CPI 10             ; Check if remainder < 10
+JC DIGIT           ; If yes, convert to ASCII for digits
+ADI 55             ; Convert to ASCII for A-F
+JMP SAVE_TO_MEM
+DIGIT: ADI 48       ; Convert to ASCII for 0-9
+SAVE_TO_MEM: MOV M, A  ; Store ASCII value in memory
+INX H               ; Move to next memory location
+MOV A, E            ; Load quotient into A
+MOV D, A            ; Update D with quotient
+CPI 0               ; Check if quotient is 0
+JNZ CONVERT         ; If not, continue conversion
+HLT                 ; Halt the program
