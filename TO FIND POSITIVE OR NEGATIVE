@@ -1,0 +1,8 @@
+MVI A,9AH 	;Move immediate value 9AH into the accumulator
+ANI 80H 	;Logical AND operation with accumulator and immediate value 80
+JZ NEG 		;Jump to NEG if the result of the AND operation is zero
+MVI A,22 	;Move immediate value 22 into the accumulator [Positive number]
+JMP STO 	;Jump to STO
+NEG: MVI A,11 	;Move immediate value 11 into the accumulator [Negative number]
+STO: STA 8501 	;Store the accumulator content at memory location 8501
+HLT 		;Halt the processor
