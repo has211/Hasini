@@ -1,0 +1,15 @@
+LXI H, 8050     ; Load the address 8050H into the HL register pair
+MOV A, M         ; Move the contents of the memory location 8050H into the accumulator (A)
+INX H            ; Increment HL to point to the next memory location (8051H)
+MOV B, M         ; Move the contents of the memory location 8051H into the B register
+LOOP: CMP B      ; Compare A with B
+JZ STORE   ; If A == B, jump to STORE
+JC EXG     ; If A < B, jump to EXG
+SUB B      ; A = A - B
+JMP LOOP   ; Repeat the loop
+EXG:  MOV C, B   ; Store B in C (temporary storage)
+MOV B, A   ; Move A to B
+MOV A, C   ; Move C (original B) to A
+JMP LOOP   ; Repeat the loop
+STORE: STA 8059  ; Store the GCD (value of A) at memory location 8500H
+HLT        ; Halt the program
