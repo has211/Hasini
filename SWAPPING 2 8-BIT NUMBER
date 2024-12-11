@@ -1,0 +1,7 @@
+LDA 8050 ;Load the content of memory location 8050 into the accumulator (A)
+MOV B, A ;Move the content of the accumulator (A) to register B
+LDA 8051 ;Load the content of memory location 8051 into the accumulator (A)
+STA 8050 ;Store the content of the accumulator (A) at memory location 8050
+MOV A, B ;Move the content of register B to the accumulator (A)
+STA 8051 ;Store the content of the accumulator (A) at memory location 8051
+HLT 	 ;Halt the program
