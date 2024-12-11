@@ -1,0 +1,19 @@
+LXI H, 8050    ; Load HL with the address 8050H
+MOV C, M         ; Load the number of elements (n) into register C
+DCR C            ; Decrement C (n-1 passes required)
+LOOP3: MOV D, C  ; Copy C to D for inner loop control
+LXI H, 8051     ; Load HL with the starting address of the array
+LOOP2: MOV A, M  ; Load current element into A
+INX H            ; Increment HL to point to the next element
+CMP M            ; Compare A with the next element
+JNC LOOP1         ; Jump to LOOP1 if A < next element (no swap required)
+MOV B, M         ; Save the next element in B
+MOV M, A         ; Place the smaller element at the current position
+DCX H            ; Decrement HL to point to the previous element
+MOV M, B         ; Place the larger element at the next position
+INX H            ; Increment HL to restore position
+LOOP1: DCR D     ; Decrement D (inner loop counter)
+JNZ LOOP2        ; Repeat inner loop if D ≠ 0
+DCR C            ; Decrement C (outer loop counter)
+JNZ LOOP3        ; Repeat outer loop if C ≠ 0
+HLT              ; Halt the program
