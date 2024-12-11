@@ -1,0 +1,5 @@
+LDA 8000      ; Load the number from memory location 8000H into accumulator
+CMA            ; Complement the number in the accumulator (one's complement)
+STA 8001      ; Store the result (one's complement) in memory location 8001H
+
+HLT            ; Halt the program
